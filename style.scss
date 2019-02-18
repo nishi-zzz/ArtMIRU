@@ -1,0 +1,110 @@
+
+@import "variables";
+
+@mixin card {
+  width: 30%;
+  height: 400px;
+  background-color: darken($white, 1%);
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+	margin: 16px 8px;
+	display: inline-block;
+
+  /* On mouse-over, add a deeper shadow */
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  img {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px 5px 0 0;
+    object-fit: cover;
+  }
+
+  /* Add some padding inside the card container */
+  .container {
+    padding: 2px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .art-info {
+      text-align: left;
+    }
+
+    .art-meta {
+      display: flex;
+      align-items: flex-end;
+
+      .star-comment {
+        display: inline-flex;
+        font-style: serif;
+        font-size: 18px;
+        margin-left: 20px;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.fa-star {
+  color: $comment-color;
+}
+
+.fa-comments {
+  color: $comment-color;
+}
+
+body {
+	text-align: center;
+	font-family: "Hiragino Kaku Gothic ProN";
+	background-color: lighten($title-color, 40%);
+}
+
+.header {
+	width: 100%;
+	display: inline-block;
+	background-color: $header-color;
+  border-bottom: solid 2px $black;
+  // box-shadow: 2px 2px 4px gray;
+
+  .header-logo {
+      color: $title-color;
+      /* 文字の大きさを40pxにしてください */
+      font-size: 60px;
+
+      /* 文字の種類をserifにしてください */
+      // font-family: "Lucida Grande";
+      font-family: 'Amatic SC', cursive;
+      text-align: center;
+
+  }
+}
+
+
+p {
+  color: lighten($black, 50%);
+  /* 文字の大きさを20pxにしてください */
+  font-size: 14px;
+
+  /* 文字の種類を"Lucida Grande"にしてください */
+  font-family: "Lucida Grande";
+
+}
+
+.content-wrapper {
+  //width: 1200px;
+  //height: 1200px;
+  padding: 20px 0px 20px 0px;
+  margin: 0 auto;
+
+  .card {
+      @include card;
+  }
+}
