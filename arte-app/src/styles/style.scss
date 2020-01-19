@@ -71,6 +71,13 @@ body {
 	font-family: YuGothic;
 }
 
+.wrapper {
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
 .header {
   // height: 45px;
   padding-left: 20px;
@@ -91,11 +98,16 @@ body {
       color: $title-color;
       opacity: 1;
   }
+}
 
-  .header-menu {
-    img{
-    }
-  }
+.footer {
+  width: 100%;
+  background-color: $footer-color;
+  text-align: center;
+  padding: 30px 0;
+
+  position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定*/
 }
 
 

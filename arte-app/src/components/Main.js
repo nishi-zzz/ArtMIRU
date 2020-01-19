@@ -2,59 +2,31 @@ import React from 'react';
 import ArchiveCard from './ArchiveCard';
 import image from '../image/c.jpg';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 
 class Main extends React.Component {
 
   render() {
     return (
-
-      <Router>
-        <div className="content-wrapper">
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/archive">Archive</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/logout">Logout</Link>
-              </li>
-            </ul>
-          </nav>
-
-          <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/archive">
-                <Archive />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/logout">
-                <Logout />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </div>
-      </Router>
+      <div className="content-wrapper">
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/archive">
+            <Archive />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
     );
   }
 }
@@ -104,7 +76,7 @@ function Archive() {
       title: 'ひまわり',
       author: 'ゴッホ',
       image: '',
-      date: 'WEBページはHTML、CSSという言語によってその見た目が作られています。 実際にWEBページを作りながら学んでみましょう！',
+      date: '',
       commentNum: 5
     },
   ];
@@ -134,8 +106,8 @@ function Login() {
   return <h2>Login</h2>;
 }
 
-function Logout() {
-  return <h2>Logout</h2>;
+function Signup() {
+  return <h2>Signup</h2>;
 }
 
 export default Main;
