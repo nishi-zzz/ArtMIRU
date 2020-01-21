@@ -9,17 +9,12 @@ class ArchiveCard extends React.Component {
         <div>
           <img src={image} alt="Paint" />
           <div className="container">
-            <div className="art-info">
-              <h4><b>{this.props.titile}</b></h4>
+            <div className="item-info">
+              <h4><b>{this.props.title}</b></h4>
               <p>{this.props.author}</p>
             </div>
-            <div className="art-meta">
-              <div className="star-comment">
-                <p><i className="fas fa-star"></i>5</p>
-              </div>
-              <div className="star-comment">
-                <p><i className="fas fa-comments"></i>13</p>
-              </div>
+            <div className="item-meta">
+              <p>10 days ago</p>
             </div>
           </div>
         </div>

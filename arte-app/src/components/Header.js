@@ -44,10 +44,13 @@ class Header extends React.Component {
             <MenuItem key={3} onClick={()=>{this.handleLinkClick();}}>Login</MenuItem>
           </Link>
           <Link to="/signup">
-            <MenuItem key={3} onClick={()=>{this.handleLinkClick();}}>Signup</MenuItem>
+            <MenuItem key={4} onClick={()=>{this.handleLinkClick();}}>Signup</MenuItem>
           </Link>
           <Link to="/logout">
             <MenuItem key={5} onClick={()=>{this.handleLinkClick();}}>Logout</MenuItem>
+          </Link>
+          <Link to="/profile">
+            <MenuItem key={6} onClick={()=>{this.handleLinkClick();}}>Profile</MenuItem>
           </Link>
         </Menu>
       </div>
