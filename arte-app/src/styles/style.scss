@@ -182,19 +182,43 @@ p {
       width: 400px;
 
       .comment-tag {
+        margin-bottom: 20px;
         select {
           width: 100%;
+        }
+        .text-input {
+          width: 100%;
+          font-size: 14px;
+          width: 100%;
+          border: none;
+          outline: none;
+          padding-bottom: 8px;
+          box-sizing: border-box;
         }
       }
 
       .comment-text {
-        input {
+        // input {
+        //   width: 100%;
+        //   padding: 10px 10px;
+        //   margin: 8px 0;
+        //   box-sizing: border-box;
+        // }
+        .text-input {
           width: 100%;
-          padding: 10px 10px;
-          margin: 8px 0;
+          font-size: 14px;
+          width: 100%;
+          border: none;
+          outline: none;
+          padding-bottom: 8px;
           box-sizing: border-box;
         }
+        .text_underline{
+          position: relative;
+          border-top: 1px solid $border-color;
+        }
       }
+
       .submit-button {
         text-align: right;
       }
@@ -225,4 +249,53 @@ p {
 
     }
   }
+}
+
+.profile-container {
+  .profile {
+    padding: 50px;
+    margin: 0 auto;
+
+    .profile-thumbnail {
+      margin: 0 50px 50px 50px;
+      img {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .profile-text {
+      text-align: left;
+
+      h3 {
+        margin-bottom: 20px;
+      }
+      p {
+        margin-bottom: 40px;
+      }
+      .text-input {
+        font-size: 14px;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding-bottom: 8px;
+        box-sizing: border-box;
+      }
+      .text_underline{
+        position: relative;
+        border-top: 1px solid $border-color;
+      }
+    }
+  }
+
+  .submit-button {
+    width: 60%;
+    margin: 50px auto;
+    input {
+      width: 100%;
+    }
+  }
+
 }

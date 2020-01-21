@@ -25,7 +25,7 @@ class Home extends React.Component {
           </div>
           <form className='comment-form' action='/comments' method='post'>
             <div className='comment-tag'>
-              <select name='comment-tag'>
+              <select required className='text-input' name='comment-tag'>
                 <option value=''>コメントタグを選ぶ…</option>
                 <option value=''>絵を見て気づいたこと</option>
                 <option value=''>絵でなにが起きているか</option>
@@ -34,7 +34,8 @@ class Home extends React.Component {
               </select>
             </div>
             <div className='comment-text'>
-              <input type='text' value='タグの回答とそれは絵のどの部分から連想したかを書きましょう' />
+              <textarea className='text-input' type='text' placeholder='タグの回答 & それは絵のどの部分から連想したか' />
+              <div class="text_underline"></div>
             </div>
             <div className='submit-button'>
               <input type="submit" value="送信する" />

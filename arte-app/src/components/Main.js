@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './Home';
 import Archive from './Archive';
+import Profile from './Profile';
 
 import {Switch, Route} from "react-router-dom";
 
@@ -47,10 +48,6 @@ function Login() {
 
 function Signup() {
   return <h2>Signup</h2>;
-}
-
-function Profile() {
-  return <h2>Profile</h2>;
 }
 
 function Admin() {
