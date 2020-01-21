@@ -9,7 +9,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className='home-container'>
-        <h2>Home</h2>
+        <h2>今週の一枚</h2>
 
         <div className='art-frame'>
           <img src={image} alt='image' />

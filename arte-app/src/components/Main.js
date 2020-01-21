@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './Home';
 import Archive from './Archive';
 import Profile from './Profile';
+import Admin from './Admin';
 
 import {Switch, Route} from "react-router-dom";
 
@@ -29,6 +30,9 @@ class Main extends React.Component {
           <Route path="/profile">
             <Profile />
           </Route>
+          <Route path="/admin">
+            <Admin />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
@@ -48,10 +52,6 @@ function Login() {
 
 function Signup() {
   return <h2>Signup</h2>;
-}
-
-function Admin() {
-  return <h2>Admin</h2>;
 }
 
 export default Main;

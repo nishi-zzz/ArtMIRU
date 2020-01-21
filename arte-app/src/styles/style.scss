@@ -299,3 +299,35 @@ p {
   }
 
 }
+
+.admin-container {
+  .push-form {
+    padding: 50px;
+    margin: 0 auto;
+    text-align: left;
+
+    h3 {
+      margin-bottom: 20px;
+    }
+
+    .text-input {
+      font-size: 14px;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding-bottom: 8px;
+      box-sizing: border-box;
+    }
+
+    .text_underline{
+      position: relative;
+      border-top: 1px solid $border-color;
+    }
+
+    .submit-button {
+      margin: 30px 0;
+      text-align: right;
+    }
+  }
+
+}
