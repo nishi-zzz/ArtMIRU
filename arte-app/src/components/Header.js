@@ -26,7 +26,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className="header">
-        <div className="header-logo">Arte</div>
+        <div className="header-logo">ArtMIRU</div>
         <div className="header-menu">
           <MenuButton open={this.state.menuOpen} onClick={()=>this.handleMenuClick()} color='#1D1D1D'/>
         </div>
