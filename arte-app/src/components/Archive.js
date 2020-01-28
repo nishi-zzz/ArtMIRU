@@ -10,6 +10,18 @@ class Archive extends React.Component {
         image: '',
         date: '',
       },
+      {
+        title: 'ひまわり',
+        author: 'ゴッホ',
+        image: '',
+        date: '',
+      },
+      {
+        title: 'ひまわり',
+        author: 'ゴッホ',
+        image: '',
+        date: '',
+      },
     ];
 
     return (

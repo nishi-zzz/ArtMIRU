@@ -3,6 +3,9 @@ import Home from './Home';
 import Archive from './Archive';
 import Profile from './Profile';
 import Admin from './Admin';
+import Signup from './Signup';
+import About from './About';
+import Login from './Login';
 
 import {Switch, Route} from "react-router-dom";
 
@@ -40,18 +43,6 @@ class Main extends React.Component {
       </div>
     );
   }
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Login() {
-  return <h2>Login</h2>;
-}
-
-function Signup() {
-  return <h2>Signup</h2>;
 }
 
 export default Main;
