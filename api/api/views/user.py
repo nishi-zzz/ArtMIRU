@@ -14,7 +14,7 @@ def show_users():
 
 @user_router.route('/users', methods=['POST'])
 def signup():
-    json = request.get_json()  # Get POST JSON
+    json = request.get_json()
     name = json['name']
     password = json['password']
     email = json['email']
