@@ -1,0 +1,372 @@
+
+@import "variables";
+
+@mixin card {
+  width: 320px;
+  height: 400px;
+  background-color: darken($white, 1%);
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+	margin: 25px 25px;
+	display: inline-block;
+
+  /* On mouse-over, add a deeper shadow */
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  a {
+    color: $black;
+    text-decoration: none;
+  }
+
+  img {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px 5px 0 0;
+    object-fit: cover;
+  }
+
+  /* Add some padding inside the card container */
+  .container {
+    padding: 2px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .item-info {
+      text-align: left;
+      font-size: 18px;
+    }
+
+    .item-meta {
+      display: flex;
+      align-items: flex-end;
+
+      p {
+        display: inline-flex;
+        font-style: serif;
+        font-size: 16px;
+        margin-left: 20px;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.fa-star {
+  color: $comment-color;
+}
+
+.fa-comments {
+  color: $comment-color;
+}
+
+body {
+	text-align: center;
+	font-family: YuGothic;
+}
+
+.wrapper {
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+.header {
+  // height: 45px;
+  padding-left: 20px;
+  padding-right: 20px;
+	display: flex;
+  justify-content: space-between;
+	background-color: $header-color;
+  // box-shadow: 2px 2px 4px gray;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border-bottom: 1px solid #707070;
+  opacity: 1;
+  align-items: stretch;
+
+  .header-logo {
+      text-align: center;
+      font: Bold 22px/37px YuGothic;
+      letter-spacing: 0;
+      color: $title-color;
+      opacity: 1;
+  }
+}
+
+.footer {
+  width: 100%;
+  background-color: $footer-color;
+  text-align: center;
+  padding: 30px 0;
+
+  position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定*/
+}
+
+
+p {
+  color: lighten($black, 50%);
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content-wrapper {
+  //width: 1200px;
+  //height: 1200px;
+  width: 80%;
+  padding: 20px 0px 20px 0px;
+  margin: 0 auto;
+
+  .card-container {
+    .card {
+        @include card;
+    }
+  }
+}
+
+.home-container {
+  .art-frame{
+    // width: 30%;
+    height: auto;
+    background-color: darken($white, 1%);
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+  	margin: 16px 8px;
+  	display: inline-block;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px 5px 0 0;
+      object-fit: cover;
+    }
+
+
+    .art-info {
+      font-style: YuGothic;
+      .title {
+        font-size: 16px;
+        color: $black;
+      }
+      .author {
+
+      }
+    }
+  }
+
+  .comment-add {
+    border-bottom: solid 1px $border-color;
+    border-top: solid 1px $border-color;
+    display: flex;
+    justify-content: center;
+
+    .profile-thumbnail {
+      margin: 10px;
+      img {
+        width: 40px;
+      	height: 40px;
+      	border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .comment-form {
+      margin: 10px;
+      width: 400px;
+
+      .comment-tag {
+        margin-bottom: 20px;
+        select {
+          width: 100%;
+        }
+        .text-input {
+          width: 100%;
+          font-size: 14px;
+          width: 100%;
+          border: none;
+          outline: none;
+          padding-bottom: 8px;
+          box-sizing: border-box;
+        }
+      }
+
+      .comment-text {
+        // input {
+        //   width: 100%;
+        //   padding: 10px 10px;
+        //   margin: 8px 0;
+        //   box-sizing: border-box;
+        // }
+        .text-input {
+          width: 100%;
+          font-size: 14px;
+          width: 100%;
+          border: none;
+          outline: none;
+          padding-bottom: 8px;
+          box-sizing: border-box;
+        }
+        .text_underline{
+          position: relative;
+          border-top: 1px solid $border-color;
+        }
+      }
+
+      .submit-button {
+        text-align: right;
+      }
+    }
+
+  }
+
+  .comment-area {
+    border-bottom: solid 1px $border-color;
+    display: flex;
+    .profile-thumbnail {
+      margin: 10px;
+      img {
+        width: 40px;
+      	height: 40px;
+      	border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    .comment {
+      text-align: left;
+      h5 {
+        margin: 5px;
+      }
+      p {
+        margin: 5px;;
+      }
+
+    }
+  }
+}
+
+.profile-container {
+  .profile {
+    padding: 50px;
+    margin: 0 auto;
+
+    .contact-message-error {
+      color: red;
+    }
+
+    .profile-thumbnail {
+      // width: 200px;
+      height: 140px;
+      margin: 0 50px 50px 50px;
+      position: relative;
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        margin:0;
+        padding:0;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      input {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        margin:0;
+        padding:0;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        opacity: 0.0;
+        cursor: pointer;
+      }
+    }
+
+    .profile-text {
+      text-align: left;
+
+      h3 {
+        margin-bottom: 20px;
+      }
+      p {
+        margin-bottom: 40px;
+      }
+      .text-input {
+        font-size: 14px;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding-bottom: 8px;
+        box-sizing: border-box;
+      }
+      .text_underline{
+        position: relative;
+        border-top: 1px solid $border-color;
+      }
+    }
+  }
+
+}
+
+.push-form {
+  padding: 50px;
+  margin: 0 auto;
+  text-align: left;
+
+  h3 {
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+
+  .text-input {
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding-bottom: 8px;
+    box-sizing: border-box;
+  }
+
+  .text_underline{
+    position: relative;
+    border-top: 1px solid $border-color;
+  }
+
+  .submit-button {
+    width: 60%;
+    margin: 50px auto 10px auto;
+    input {
+      width: 100%;
+    }
+  }
+
+  .link {
+    text-align: center;
+    a {
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
