@@ -14,13 +14,25 @@ def show_users():
 
 @user_router.route('/users', methods=['POST'])
 def signup():
-    json = request.get_json()
-    name = json['name']
-    password = json['password']
-    email = json['email']
-    image_path = json['image_path']
-    profile = json['profile']
+    # name = request.args.get('name', default='', type=str)
+    # password = request.args.get('password', default='', type=str)
+    # email = request.args.get('email', default='', type=str)
+    # image_path = request.args.get('image_path', default='', type=str)
+    # profile = request.args.get('profile', default='', type=str)
+
+    print('-----------')
+    print(request.json)
+    print('-----------')
+
+    post_contents = request.get_json()
+    name = post_contents['name']
+    password = post_contents['password']
+    email = post_contents['email']
+    image_path = post_contents['image_path']
+    profile = post_contents['profile']
 
     new_user = User(name=name, password=password, email=email, image_path=image_path, profile=profile, is_admin=False)
     db.session.add(new_user)
     db.session.commit()
+
+    return jsonify({'name': name})

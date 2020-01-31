@@ -60,20 +60,25 @@ class Signup extends React.Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    const data = JSON.stringify({
+      name: this.state.name,
+      password: this.state.password,
+      email: this.state.email,
+      image_path: this.state.image_src,
+      profile: this.state.profile
+    })
+    console.log(data);
+    const header = {'Content-Type': 'application/json;charset=UTF-8'}
 
-    // // form値取得
-    // const params = {
-    //   name: this.state.name,
-    //   image_src: this.state.image_src,
-    //   email: this.state.email,
-    //   password: this.state.password,
-    //   profile: this.state.profile
-    // }
-    //
-    // alert(JSON.stringify(params, null, ''));
-
-    axios.post();
+    axios.post('http://127.0.0.1:5000/api/users', data, header)
+    .then(function (response) {
+      console.log(response);
+      alert(JSON.stringify(response, null, ''));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render() {
