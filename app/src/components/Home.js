@@ -35,7 +35,7 @@ class Home extends React.Component {
             </div>
             <div className='comment-text'>
               <textarea className='text-input' type='text' placeholder='タグの回答 & それは絵のどの部分から連想したか' />
-              <div class="text_underline"></div>
+              <div className="text_underline"></div>
             </div>
             <div className='submit-button'>
               <input type="submit" value="送信する" />

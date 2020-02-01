@@ -20,7 +20,7 @@ class Admin extends React.Component {
           <div className='author'>
             <h3>著作者名</h3>
             <input className='text-input' name='art-author' />
-            <div class="text_underline"></div>
+            <div className="text_underline"></div>
           </div>
 
           <div className='submit-button'>

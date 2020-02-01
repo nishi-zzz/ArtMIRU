@@ -21,7 +21,7 @@ def signup():
     # profile = request.args.get('profile', default='', type=str)
 
     print('-----------')
-    print(request.json)
+    print(request.get_json())
     print('-----------')
 
     post_contents = request.get_json()
@@ -35,4 +35,4 @@ def signup():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({'name': name})
+    # return jsonify({'name': name})

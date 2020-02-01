@@ -122,25 +122,25 @@ class Profile extends React.Component {
               <div className='name'>
                 <h3>ユーザ名</h3>
                 <input className='text-input' value={this.state.name} onChange={this.changeName} />
-                <div class="text_underline"></div>
+                <div className="text_underline"></div>
                 {nameErrorText}
               </div>
               <div className='address'>
                 <h3>メールアドレス</h3>
                 <input className='text-input' value={this.state.email} onChange={this.changeEmail} />
-                <div class="text_underline"></div>
+                <div className="text_underline"></div>
                 {emailErrorText}
               </div>
               <div className='password'>
                 <h3>パスワード</h3>
                 <input className='text-input' type="password" name='art-title' value={this.state.password} onChange={this.changePassword} />
-                <div class="text_underline"></div>
+                <div className="text_underline"></div>
                 {passwordErrorText}
               </div>
               <div className='introducea'>
                 <h3>自己紹介</h3>
                 <textarea className='text-input' value={this.state.profile} onChange={this.changeProfile} />
-                <div class="text_underline"></div>
+                <div className="text_underline"></div>
               </div>
             </div>
           </div>

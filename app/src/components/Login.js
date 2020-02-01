@@ -53,13 +53,13 @@ class Login extends React.Component {
           <div className='email'>
             <h3>メールアドレス</h3>
             <input className='text-input' value={this.state.email} onChange={this.changeEmail} />
-            <div class="text_underline"></div>
+            <div className="text_underline"></div>
           </div>
 
           <div className='password'>
             <h3>パスワード</h3>
             <input className='text-input' type="password" value={this.state.password} onChange={this.changePassword} />
-            <div class="text_underline"></div>
+            <div className="text_underline"></div>
           </div>
 
           <div className='submit-button'>
