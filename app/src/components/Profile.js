@@ -1,7 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 import profile_image from '../image/default3.svg'
 
-var createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
+let createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
 class Profile extends React.Component {
   constructor(props){
@@ -16,7 +17,8 @@ class Profile extends React.Component {
       hasEmailError: false,
       hasPasswordError: false
     }
-  }
+  };
+
 
   handleChangeFile = (e) => {
     var files = e.target.files;
@@ -58,19 +60,27 @@ class Profile extends React.Component {
     this.setState({profile: e.target.value});
   }
 
-  handleSubmit = (e) => {
+  handleSubmit(e) {
     e.preventDefault();
-
-    // form値取得
-    const params = {
+    const data = JSON.stringify({
       name: this.state.name,
-      image_src: this.state.image_src,
-      email: this.state.email,
       password: this.state.password,
+      email: this.state.email,
+      image_path: this.state.image_src,
       profile: this.state.profile
-    }
-
-    alert(JSON.stringify(params, null, ''));
+    })
+    let isError = false;
+    // あとで変更↓
+    let id = '81';
+    const url = 'http://127.0.0.1:5000/api/users/' + id;
+    const header = {'Content-Type': 'application/json'};
+    axios.put(url, data, {headers: header})
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render() {
@@ -111,8 +121,8 @@ class Profile extends React.Component {
 
     return (
       <div className='profile-container'>
-        <h2>プロフィール設定</h2>
-        <form className='profile' onSubmit={this.handleSubmit}>
+        <h2>プロフィール</h2>
+        <form className='profile' onSubmit={(e) => {this.handleSubmit(e)}}>
           <div className='edit-area'>
             <div className='profile-thumbnail'>
               <img src={this.state.image_src} />

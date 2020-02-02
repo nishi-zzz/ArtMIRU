@@ -20,6 +20,8 @@ def signup():
     print('-----------')
 
     post_contents = request.get_json()
+    if isinstance(post_contents, type(None)):
+        return 'json is empty'
     name = post_contents['name']
     password = post_contents['password']
     email = post_contents['email']
@@ -34,3 +36,45 @@ def signup():
         return 'sql error'
 
     return 'got request'
+
+@user_router.route('/users/<int:id>', methods=['PUT'])
+def update_user(id):
+    print('-----------')
+    print(request.get_json())
+    print('-----------')
+
+    post_contents = request.get_json()
+    if isinstance(post_contents, type(None)):
+        return 'json is empty'
+    name = post_contents['name']
+    password = post_contents['password']
+    email = post_contents['email']
+    image_path = post_contents['image_path']
+    profile = post_contents['profile']
+
+    user = User.query.get(id)
+    if isinstance(user, type(None)):
+        return 'PUT fail, {} is not found'.format(id)
+
+    try:
+        user.name = name
+        user.password = password
+        user.email = email
+        user.image_path = image_path
+        user.profile = profile
+        db.session.add(user)
+        db.session.commit()
+    except:
+        return 'sql error'
+
+    return 'got request'
+
+@user_router.route('/users/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    try:
+        db.session.query(User).filter(User.id==id).delete()
+        db.session.commit()
+    except:
+        return 'sql error'
+
+    return 'user #{} deleted'.format(id)
