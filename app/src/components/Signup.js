@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import profile_image from '../image/default3.svg'
+import { withRouter } from 'react-router';
 
-var createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
+let createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
 class Signup extends React.Component {
   constructor(props){
@@ -17,7 +18,8 @@ class Signup extends React.Component {
       hasEmailError: false,
       hasPasswordError: false
     }
-  }
+  };
+
 
   handleChangeFile = (e) => {
     var files = e.target.files;
@@ -59,7 +61,7 @@ class Signup extends React.Component {
     this.setState({profile: e.target.value});
   }
 
-  handleSubmit = (e) => {
+  handleSubmit(e) {
     e.preventDefault();
     const data = JSON.stringify({
       name: this.state.name,
@@ -68,19 +70,24 @@ class Signup extends React.Component {
       image_path: this.state.image_src,
       profile: this.state.profile
     })
-
+    let isError = false;
     const header = {'Content-Type': 'application/json'}
-    axios.post('http://127.0.0.1:5000/api/users', data, header)
+    axios.post('http://127.0.0.1:5000/api/users', data, {headers: header})
     .then(function (response) {
       console.log(response);
-      alert(JSON.stringify(response, null, ''));
+      if(response.data === 'sql error') {
+        isError = true;
+      }
     })
     .catch(function (error) {
       console.log(error);
     });
 
-    console.log(data)
-    console.log(header)
+    if(!isError) {
+      this.props.history.push('/');
+      console.log('push');
+    }
+
   }
 
   render() {
@@ -122,7 +129,7 @@ class Signup extends React.Component {
     return (
       <div className='profile-container'>
         <h2>新規登録</h2>
-        <form className='profile' onSubmit={this.handleSubmit}>
+        <form className='profile' onSubmit={(e) => {this.handleSubmit(e)}}>
           <div className='edit-area'>
             <div className='profile-thumbnail'>
               <img src={this.state.image_src} />
@@ -163,4 +170,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);
