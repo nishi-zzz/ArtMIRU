@@ -13,6 +13,23 @@ def show_arts():
     arts_schema = ArtSchema(many=True)
     return jsonify({'arts': arts_schema.dump(arts)})
 
+@art_router.route('/arts/<int:id>', methods=['GET'])
+def show_art(id):
+    art = Art.query.get(id)
+    if isinstance(art, type(None)):
+        return 'GET fail, {} is not found'.format(id)
+    title = art.title
+    author = art.author
+    image_path = art.image_path
+    created_at = art.created_at
+    return jsonify({
+    'art': {
+        'title': title,
+        'author': author,
+        'image_path': image_path,
+        'created_at': created_at
+    }})
+
 @art_router.route('/arts', methods=['POST'])
 def register_art():
     print('-----------')
@@ -62,3 +79,13 @@ def update_art(id):
         return 'sql error'
 
     return 'got request'
+
+@art_router.route('/arts/<int:id>', methods=['DELETE'])
+def delete_art(id):
+    try:
+        db.session.query(Art).filter(Art.id==id).delete()
+        db.session.commit()
+    except:
+        return 'sql error'
+
+    return 'user #{} deleted'.format(id)
