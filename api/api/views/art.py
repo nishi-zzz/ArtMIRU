@@ -34,3 +34,31 @@ def register_art():
         return 'sql error'
 
     return 'got request'
+
+@art_router.route('/arts/<int:id>', methods=['PUT'])
+def update_art(id):
+    print('-----------')
+    print(request.get_json())
+    print('-----------')
+
+    post_contents = request.get_json()
+    if isinstance(post_contents, type(None)):
+        return 'json is empty'
+    title = post_contents['title']
+    author = post_contents['author']
+    image_path = post_contents['image_path']
+
+    art = Art.query.get(id)
+    if isinstance(art, type(None)):
+        return 'PUT fail, {} is not found'.format(id)
+
+    try:
+        art.title = title
+        art.author = author
+        art.image_path = image_path
+        db.session.add(art)
+        db.session.commit()
+    except:
+        return 'sql error'
+
+    return 'got request'
