@@ -1,6 +1,7 @@
 from flask import Flask, make_response, jsonify
 from .views.user import user_router
 from .views.art import art_router
+from .views.comment import comment_router
 from api.database import init_db
 import api.models
 from flask_marshmallow import Marshmallow
@@ -12,6 +13,7 @@ def create_app():
     app.config.from_object('api.config.Config')
     app.register_blueprint(user_router, url_prefix='/api')
     app.register_blueprint(art_router, url_prefix='/api')
+    app.register_blueprint(comment_router, url_prefix='/api')
 
     init_db(app)
     CORS(app)

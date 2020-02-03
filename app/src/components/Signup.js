@@ -73,22 +73,15 @@ class Signup extends React.Component {
     let isError = false;
     const header = {'Content-Type': 'application/json'}
     axios.post('http://127.0.0.1:5000/api/users', data, {headers: header})
-    .then(function (response) {
+    .then((response) =>  {
       console.log(response);
-      this.props.history.push('/');
-      // if(response.data === 'sql error') {
-      //   isError = true;
-      // }
+      if(response.data !== 'sql error') {
+        this.props.history.push('/');
+      }
     })
-    .catch(function (error) {
+    .catch((error) =>  {
       console.log(error);
     });
-    //
-    // if(!isError) {
-    //   this.props.history.push('/');
-    //   console.log('push');
-    // }
-
   }
 
   render() {

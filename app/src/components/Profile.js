@@ -75,10 +75,10 @@ class Profile extends React.Component {
     const url = 'http://127.0.0.1:5000/api/users/' + id;
     const header = {'Content-Type': 'application/json'};
     axios.put(url, data, {headers: header})
-    .then(function (response) {
+    .then((response) => {
       console.log(response);
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     });
   }

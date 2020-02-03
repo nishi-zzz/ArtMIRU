@@ -18,17 +18,8 @@ def show_art(id):
     art = Art.query.get(id)
     if isinstance(art, type(None)):
         return 'GET fail, {} is not found'.format(id)
-    title = art.title
-    author = art.author
-    image_path = art.image_path
-    created_at = art.created_at
-    return jsonify({
-    'art': {
-        'title': title,
-        'author': author,
-        'image_path': image_path,
-        'created_at': created_at
-    }})
+    arts_schema = ArtSchema()
+    return jsonify({'art': arts_schema.dump(art)})
 
 @art_router.route('/arts', methods=['POST'])
 def register_art():

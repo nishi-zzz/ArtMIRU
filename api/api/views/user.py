@@ -13,6 +13,14 @@ def show_users():
     users_schema = UserSchema(many=True)
     return jsonify({'users': users_schema.dump(users)})
 
+@user_router.route('/users/<int:id>', methods=['GET'])
+def show_user(id):
+    user = User.query.get(id)
+    if isinstance(user, type(None)):
+        return 'GET fail, {} is not found'.format(id)
+    users_schema = UserSchema()
+    return jsonify({'user': users_schema.dump(user)})
+
 @user_router.route('/users', methods=['POST'])
 def signup():
     print('-----------')
