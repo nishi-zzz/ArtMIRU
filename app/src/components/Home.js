@@ -52,7 +52,7 @@ class Home extends React.Component {
                 <option value='story'>絵の中で描かれていること</option>
                 <option value='next'>これからなにが起きそうか</option>
                 <option value='notice'>絵を見て気づいたこと</option>
-                <option value='notice'>その他</option>
+                <option value='other'>その他</option>
               </select>
             </div>
             <div className='comment-text'>
