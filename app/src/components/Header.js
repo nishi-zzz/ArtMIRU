@@ -2,6 +2,8 @@ import React from 'react';
 import MenuButton from './MenuButton';
 import Menu from './Menu';
 import MenuItem from './MenuItem';
+import { useAuth0 } from "../react-auth0-spa";
+
 
 import {
   BrowserRouter as Router,
@@ -9,6 +11,7 @@ import {
 } from "react-router-dom";
 
 class Header extends React.Component {
+
   constructor(props){
     super(props);
     this.state={
@@ -24,6 +27,9 @@ class Header extends React.Component {
   }
 
   render() {
+
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    
     return (
       <div className="header">
         <a className="header-logo" href='/home'>ArtMIRU</a>
@@ -40,18 +46,19 @@ class Header extends React.Component {
           <Link to="/archive">
             <MenuItem key={2} onClick={()=>{this.handleLinkClick();}}>Archive</MenuItem>
           </Link>
-          <Link to="/login">
-            <MenuItem key={3} onClick={()=>{this.handleLinkClick();}}>Login</MenuItem>
-          </Link>
           <Link to="/signup">
-            <MenuItem key={4} onClick={()=>{this.handleLinkClick();}}>Signup</MenuItem>
-          </Link>
-          <Link to="/logout">
-            <MenuItem key={5} onClick={()=>{this.handleLinkClick();}}>Logout</MenuItem>
+            <MenuItem key={3} onClick={()=>{this.handleLinkClick();}}>Signup</MenuItem>
           </Link>
           <Link to="/profile">
-            <MenuItem key={6} onClick={()=>{this.handleLinkClick();}}>Profile</MenuItem>
+            <MenuItem key={4} onClick={()=>{this.handleLinkClick();}}>Profile</MenuItem>
           </Link>
+          <div>
+            {!isAuthenticated && (
+                <MenuItem key={5} onClick={()=>{this.handleLinkClick();loginWithRedirect({});}}>Log in</MenuItem>
+            )}
+
+            {isAuthenticated && <MenuItem key={6} onClick={()=>{this.handleLinkClick();logout();}}>Log out</MenuItem>}
+          </div>
         </Menu>
       </div>
     );
