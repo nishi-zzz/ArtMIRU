@@ -39,18 +39,18 @@ function HeaderHooks() {
         <Link to="/archive">
           <MenuItem key={2} onClick={()=>{handleLinkClick();}}>Archive</MenuItem>
         </Link>
-        <Link to="/signup">
-          <MenuItem key={3} onClick={()=>{handleLinkClick();}}>Signup</MenuItem>
-        </Link>
-        <Link to="/profile">
-          <MenuItem key={4} onClick={()=>{handleLinkClick();}}>Profile</MenuItem>
-        </Link>
         <div>
           {!isAuthenticated && (
               <MenuItem key={5} onClick={()=>{handleLinkClick();loginWithRedirect({});}}>Log in</MenuItem>
           )}
-
-          {isAuthenticated && <MenuItem key={6} onClick={()=>{handleLinkClick();logout();}}>Log out</MenuItem>}
+          {isAuthenticated && (
+            <Link to="/profile">
+              <MenuItem key={4} onClick={()=>{handleLinkClick();}}>Profile</MenuItem>
+            </Link>
+          )}
+          {isAuthenticated && (
+            <MenuItem key={6} onClick={()=>{handleLinkClick();logout();}}>Log out</MenuItem>
+          )}
         </div>
       </Menu>
     </div>

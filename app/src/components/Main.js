@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './Home';
 import Archive from './Archive';
-import Profile from './Profile';
+import ProfileHooks from './ProfileHooks';
 import Admin from './Admin';
 import Signup from './Signup';
 import About from './About';
@@ -31,7 +31,7 @@ class Main extends React.Component {
             <Admin />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <ProfileHooks />
           </Route>
           <Route path="/admin">
             <Admin />
