@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+// import App from './components/App';
+import AppHooks from './components/AppHooks';
 import './styles/style.scss';
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
@@ -23,7 +24,7 @@ ReactDOM.render(
     redirect_uri={window.location.origin}
     onRedirectCallback={onRedirectCallback}
   >
-    <App />
+    <AppHooks />
   </Auth0Provider>,
   document.getElementById("root")
 );
