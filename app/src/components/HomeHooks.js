@@ -8,28 +8,108 @@ import profile_image from '../image/me.jpg';
 import { useAuth0 } from "../react-auth0-spa";
 
 function HomeHooks() {
-  const [title, setTitle] = useState("ひまわり");
-  const [author, setAuthor] = useState("ゴッホ");
+  const [art_id, setArtId] = useState(2);
+  const [art_title, setArtTitle] = useState();
+  const [art_author, setArtAuthor] = useState();
+  const [art_image_path, setArtImagePath] = useState();
+  const [art_comments, setArtComments] = useState();
 
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const [user_id, setUserId] = useState();
+  const [tag_value, setTagValue] = useState('NaN');
+  const [tag_id, setTagId] = useState(0);
+  const [comment_value, setCommentValue] = useState('タグの回答 & それは絵のどの部分から連想したか');
 
-  // useEffect(() => {
-  //   async function fetchArtData() {
-  //     const url = 'http://127.0.0.1:5000/api/arts';
-  //     const header = {'Content-Type': 'application/json'};
-  //     await axios.get(url, {headers: header})
-  //     .then((response) => {
-  //       const art = response.data.arts[0]
-  //       setTitle(art.title);
-  //       setAuthor(art.title);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   }
-  //
-  //   fetchArtData();
-  // }, []);
+  const [button, setButton] = useState((<input type="submit" value="コメントを送信する" disabled />));
+
+  const { loading, user, isAuthenticated, loginWithRedirect } = useAuth0();
+
+  useEffect(() => {
+    async function fetchArtData() {
+      const url = 'http://127.0.0.1:5000/api/arts/2';
+      const header = {'Content-Type': 'application/json'};
+      await axios.get(url, {headers: header})
+      .then((response) => {
+        const art = response.data.art
+        setArtId(art.id);
+        setArtTitle(art.title);
+        setArtAuthor(art.author);
+        setArtImagePath(art.image_path);
+        setArtComments(art.comments);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+    fetchArtData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      const url = 'http://127.0.0.1:5000/api/users/' + user.email;
+      await axios.get(url)
+      .then((response) => {
+        console.log(response);
+        const user = response.data.user;
+        setUserId(user.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+    fetchUserData();
+  }, []);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const data = JSON.stringify({
+      art_id: art_id,
+      user_id: user_id,
+      tag_id: tag_id,
+      content: comment_value
+    })
+    const url = 'http://127.0.0.1:5000/api/comments';
+    const header = {'Content-Type': 'application/json'};
+    await axios.post(url, data, {headers: header})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  function handleTagChange(e) {
+    setTagValue(e.target.value);
+    if (tag_value == 'NaN') {
+      setTagId(0);
+      setButton((<input type="submit" value="コメントを送信する" disabled />));
+    } else if (tag_value == 'feel') {
+      setTagId(1);
+      setButton((<input type="submit" value="コメントを送信する" />));
+    } else if (tag_value == 'story') {
+      setTagId(2);
+      setButton((<input type="submit" value="コメントを送信する" />));
+    } else if (tag_value == 'next') {
+      setTagId(3);
+      setButton((<input type="submit" value="コメントを送信する" />));
+    } else if (tag_value == 'notice') {
+      setTagId(4);
+      setButton((<input type="submit" value="コメントを送信する" />));
+    } else if (tag_value == 'other') {
+      setTagId(5);
+      setButton((<input type="submit" value="コメントを送信する" />));
+    }
+  }
+
+  function handleCommentChange(e) {
+    setCommentValue(e.target.value);
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className='home-container'>
@@ -38,8 +118,8 @@ function HomeHooks() {
       <div className='art-frame'>
         <img src={image} alt='image' />
         <div className='art-info'>
-          <p className='title'>{ title }</p>
-          <p className='author'>{ author }</p>
+          <p className='title'>{ art_title }</p>
+          <p className='author'>{ art_author }</p>
         </div>
       </div>
       {!isAuthenticated && (
@@ -48,11 +128,11 @@ function HomeHooks() {
       {isAuthenticated && (
         <div className='comment-add'>
           <div className='profile-thumbnail'>
-            <img src={profile_image} alt='NaN' />
+            <img src={user.picture} alt='NaN' />
           </div>
-          <form className='comment-form' action='/comments' method='post'>
+          <form className='comment-form' onSubmit={(e) => {handleSubmit(e)}}>
             <div className='comment-tag'>
-              <select required className='text-input' name='comment-tag'>
+              <select required className='text-input' value={tag_value} onChange={handleTagChange}>
                 <option value='NaN'>コメントタグを選ぶ…</option>
                 <option value='feel'>絵をみて感じたこと</option>
                 <option value='story'>絵の中で描かれていること</option>
@@ -62,11 +142,11 @@ function HomeHooks() {
               </select>
             </div>
             <div className='comment-text'>
-              <textarea className='text-input' type='text' placeholder='タグの回答 & それは絵のどの部分から連想したか' />
+              <textarea className='text-input' type='text' value={comment_value} onChange={handleCommentChange} />
               <div className="text_underline"></div>
             </div>
             <div className='submit-button'>
-              <input type="submit" value="送信する" />
+              {button}
             </div>
           </form>
         </div>

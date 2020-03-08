@@ -13,9 +13,10 @@ def show_users():
     users_schema = UserSchema(many=True)
     return jsonify({'users': users_schema.dump(users)})
 
-@user_router.route('/users/<int:id>', methods=['GET'])
-def show_user(id):
-    user = User.query.get(id)
+@user_router.route('/users/<string:email>', methods=['GET'])
+def show_user(email):
+    # user = User.query.get(id)
+    user = User.query.filter(User.email==email).first()
     if isinstance(user, type(None)):
         return 'GET fail, {} is not found'.format(id)
     users_schema = UserSchema()

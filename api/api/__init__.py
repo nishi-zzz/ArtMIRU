@@ -16,7 +16,6 @@ def create_app():
     app.register_blueprint(art_router, url_prefix='/api')
     app.register_blueprint(comment_router, url_prefix='/api')
     app.register_blueprint(tag_router, url_prefix='/api')
-    app.register_blueprint(oauth_router, url_prefix='/api')
 
     init_db(app)
     CORS(app)
@@ -25,5 +24,3 @@ def create_app():
 
 app = create_app()
 ma = Marshmallow(app)
-
-from api.views import oauth
