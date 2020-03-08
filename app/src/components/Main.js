@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './Home';
+import HomeHooks from './HomeHooks';
 import Archive from './Archive';
 import ProfileHooks from './ProfileHooks';
 import Admin from './Admin';
@@ -37,7 +37,7 @@ class Main extends React.Component {
             <Admin />
           </Route>
           <Route path="/">
-            <Home />
+            <HomeHooks />
           </Route>
         </Switch>
       </div>

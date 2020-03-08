@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import profile_image from '../image/default3.svg';
 import { useAuth0 } from "../react-auth0-spa";
@@ -6,23 +6,25 @@ import { useAuth0 } from "../react-auth0-spa";
 let createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
 function ProfileHooks() {
-  const [name, setName] = useState('');
-  const [image_src, setImageSrc] = useState(profile_image);
-  const [email, setEmail] = useState('');
-  const [profile, setProfile] = useState('');
-  const [password, setPassword] = useState('');
-  const [hasNameError, setHasNameError] = useState(false);
-  const [hasEmailError, setHasEmailError] = useState(false);
-  const [hasPasswordError, setHasPasswordError] = useState(false);
-
   const { loading, user } = useAuth0();
 
-  if (loading || !user) {
+  const [name, setName] = useState(user.nickname);
+  const [image_src, setImageSrc] = useState(user.picture);
+  const [email, setEmail] = useState(user.email);
+  const [profile, setProfile] = useState('');
+  const [hasNameError, setHasNameError] = useState(false);
+  const [hasEmailError, setHasEmailError] = useState(false);
+
+  if (loading) {
     return <div>Loading...</div>;
   }
 
+  if (!user) {
+    return <div>ログインしてください</div>
+  }
+
   const handleChangeFile = (e) => {
-    var files = e.target.files;
+    var files = e.target.filest
     var image_url = files.length===0 ? image_src : createObjectURL(files[0]);
     setImageSrc(image_url);
   }
@@ -43,14 +45,6 @@ function ProfileHooks() {
     setHasEmailError(isEmpty);
   }
 
-  const changePassword = (e) => {
-    const inputValue = e.target.value;
-    const isEmpty = inputValue === '';
-
-    setPassword(inputValue);
-    setHasPasswordError(isEmpty);
-  }
-
   const changeProfile = (e) => {
     setProfile(e.target.value);
   }
@@ -59,7 +53,6 @@ function ProfileHooks() {
     e.preventDefault();
     const data = JSON.stringify({
       name: name,
-      password: password,
       email: email,
       image_path: image_src,
       profile: profile
@@ -78,7 +71,7 @@ function ProfileHooks() {
     });
   }
 
-  let nameErrorText, emailErrorText, passwordErrorText;
+  let nameErrorText, emailErrorText;
 
   if (hasNameError) {
     nameErrorText = (
@@ -94,16 +87,9 @@ function ProfileHooks() {
       </p>
     )
   }
-  if (hasPasswordError) {
-    passwordErrorText = (
-      <p className='contact-message-error'>
-        パスワードを入力してください
-      </p>
-    )
-  }
 
   let button;
-  if (hasNameError || hasEmailError || hasPasswordError) {
+  if (hasNameError || hasEmailError) {
     button = (
       <input type="submit" value="変更内容を保存" disabled />
     )
@@ -115,7 +101,7 @@ function ProfileHooks() {
 
   return (
     <div className='profile-container'>
-      <h2>プロフィール</h2>
+      <h2>プロフィール設定</h2>
       <form className='profile' onSubmit={(e) => {handleSubmit(e)}}>
         <div className='edit-area'>
           <div className='profile-thumbnail'>
@@ -134,12 +120,6 @@ function ProfileHooks() {
               <input className='text-input' value={email} onChange={changeEmail} />
               <div className="text_underline"></div>
               {emailErrorText}
-            </div>
-            <div className='password'>
-              <h3>パスワード</h3>
-              <input className='text-input' type="password" name='art-title' value={password} onChange={changePassword} />
-              <div className="text_underline"></div>
-              {passwordErrorText}
             </div>
             <div className='introducea'>
               <h3>自己紹介</h3>
